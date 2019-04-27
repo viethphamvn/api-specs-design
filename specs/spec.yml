@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: Flight Document Search
+  description: |
+    API that returns required documents for each specific flight. 
+    Able to return personalized result for each user.
+  version: 0.0.1
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+paths:
+  /flights/{flight_id}/req_docs:
+    post:
+      summary: look for required documents based on user's information
+      parameters:
+        - name: flight_id
+          in: path
+          required: true
+          description: Identifier of the flight.
+          schema:
+            type: string
+          example: CX841
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              items:
+                user_id:
+                  type: string
+                  example: c6942236-ece3-41b0-805d-15ad1b985025
+            example:
+              user_id:
+                value: e0d232a6-9f03-4fe6-8623-71d5d17a3521
+
+      responses:
+        "200": # status code
+          description: A JSON array of required documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  [
+                    "document 1": "valid U.S. passport with at least six months validity remaining beyond the date of arrival",
+                    "document 2": "Vietnam single-entry e-visa",
+                  ]
+
+    get:
+      summary: look for required documents
+      parameters:
+        - name: flight_id
+          in: path
+          required: true
+          description: Identifier of the flight.
+          schema:
+            type: string
+          example: AA358
+
+      responses:
+        "200": # status code
+          description: A JSON array of required documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  [
+                    "document 1": "valid U.S. passport with at least six months validity remaining beyond the date of arrival",
+                    "document 2": "Vietnam single-entry e-visa",
+                  ]
