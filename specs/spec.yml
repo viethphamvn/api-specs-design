@@ -1,77 +1,92 @@
 openapi: 3.0.0
 info:
-  title: Flight Document Search
+  title: Customer Service Rating Hahah
   description: |
-    API that returns required documents for each specific flight. 
-    Able to return personalized result for each user.
+    API that returns representative current rating and post new rating
   version: 0.0.1
 servers:
   - url: http://api.example.com/v1
     description: Optional server description, e.g. Main (production) server
 paths:
-  /flights/{flight_id}/req_docs:
+  /customer_service/representative/{reps_id}/rating:
     post:
-      summary: look for required documents based on user's information
+      summary: Rate a representative’s chat session
       parameters:
-        - name: flight_id
+        - name: reps_id
           in: path
           required: true
-          description: Identifier of the flight.
+          description: Identifier of the representative.
           schema:
             type: string
-          example: CX841
+          example: 0ceac7d3-ab45-460a-a561-b56b3b7cd1ca
 
       requestBody:
         required: true
         content:
           application/json:
+            example: [
+              {
+                session_id: 042819-004,
+                rating: 2
+              }
+            ]
+            
             schema:
-              type: string
+              type: array
               items:
-                user_id:
-                  type: string
-                  example: c6942236-ece3-41b0-805d-15ad1b985025
-            example:
-              user_id:
-                value: e0d232a6-9f03-4fe6-8623-71d5d17a3521
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                    example: 042519-223
+                  rating:
+                    type: integer
+                    minimum: 1
+                    maximum: 5
+                    example: 3
 
       responses:
         "200": # status code
-          description: A JSON array of required documents
+          description: Status code, confirmation message
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
-                example:
-                  [
-                    "document 1": "valid U.S. passport with at least six months validity remaining beyond the date of arrival",
-                    "document 2": "Vietnam single-entry e-visa",
-                  ]
-
+                type: string
+                example: 
+                  "Rating is recorded. Thank you!"
     get:
-      summary: look for required documents
+      summary: look up representative information
       parameters:
-        - name: flight_id
+        - name: reps_id
           in: path
           required: true
-          description: Identifier of the flight.
+          description: Identifier of the representative.
           schema:
             type: string
-          example: AA358
+          example: 68f0d4ae-50f7-4de8-93a9-7d1d7d64bedb
 
       responses:
         "200": # status code
-          description: A JSON array of required documents
+          description: current rating
           content:
             application/json:
+              example: [
+                {
+                reps_id: ad4e8413-c6a5-4563-b665-a194abf570be,
+                rating: 3.5
+                }
+              ]
+
               schema:
                 type: array
                 items:
-                  type: string
-                example:
-                  [
-                    "document 1": "valid U.S. passport with at least six months validity remaining beyond the date of arrival",
-                    "document 2": "Vietnam single-entry e-visa",
-                  ]
+                  properties:
+                    reps_id:
+                      type: string
+                      example: 72ad52e0-cad6-4927-922a-2b4ed48f4d8e
+                    rating:
+                      type: number
+                      example: 4.3
+                    
+                
+                  

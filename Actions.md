@@ -1,24 +1,26 @@
-1. Look for required documents for a flight
+1. Look up representative information
 
    - Method
      - GET
    - URL
-     - /flights/{flight_id}/req_docs
+     - /customer_service/representative/{reps_id}/rating
    - Inputs
-     - Flight ID
+     - Representative ID
    - Response
-     - A list of required documents
+     - reps_id
+     - current rating
 
-2. Look for required documents base on user's information
+2. Rate a representative’s chat session
 
    - Method
      - POST
    - URL
-     - /flights/{flight_id}/req_docs
+     - /customer_service/representative/{reps_id}/rating
    - Inputs
-     - flight_id
-     - user_id
+     - Representative ID
+     - Session ID
+     - Rating
    - Responses
-     - A list of required documents
+     - Confirmation message
    - Expected result
-   - A list of required documents specifying for the user
+     - Rating is recorded
