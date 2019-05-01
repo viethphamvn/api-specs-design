@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Customer Service Rating Hahah
+  title: Customer Service Rating
   description: |
     API that returns representative current rating and post new rating
   version: 0.0.1
@@ -47,13 +47,21 @@ paths:
 
       responses:
         "200": # status code
-          description: Status code, confirmation message
+          description: Rating is recorded successfully
           content:
             application/json:
               schema:
                 type: string
                 example: 
                   "Rating is recorded. Thank you!"
+        "400": 
+          description: Invalid rating
+          content:
+            application/json:
+              schema:
+                type: string
+                example:
+                  "Rating choice is invalid"
     get:
       summary: look up representative information
       parameters:
@@ -67,7 +75,7 @@ paths:
 
       responses:
         "200": # status code
-          description: current rating
+          description: return current rating successfully 
           content:
             application/json:
               example: [
@@ -87,6 +95,14 @@ paths:
                     rating:
                       type: number
                       example: 4.3
+        "404": 
+          description: requested content not found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 
+                  "Requested information is not available"
                     
                 
                   
