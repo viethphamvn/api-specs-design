@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker stop customer_service_rating
+docker stop customer-service-rating
