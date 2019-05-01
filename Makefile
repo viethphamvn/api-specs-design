@@ -1,9 +1,9 @@
 .PHONY: docs docs-serve docker-build docker-run docker-all
 docs:
-	redoc-cli bundle -o ./docs/index.html specs/api.yml
+	redoc-cli bundle -o ./docs/index.html specs/spec.yml
 
 docs-serve:
-	redoc-cli serve -w -ssr -p 9999 specs/api.yml
+	redoc-cli serve -w -ssr -p 9999 specs/spec.yml
 
 docker-build:
 	docker build -t customer-service-rating:latest .
